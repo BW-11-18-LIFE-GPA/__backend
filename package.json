@@ -4,7 +4,9 @@
   "description": "will be the backend for the 11/18--LIFE--GPA",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,7 @@
     "helmet": "^3.21.2",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.2",
+    "pg": "^7.12.1",
     "sqlite3": "^4.1.0"
   }
 }
