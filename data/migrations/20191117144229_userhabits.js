@@ -11,5 +11,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  knex.schema.dropTableIfExists('user_habits')
+  return knex.schema.dropTableIfExists('user_habits')
 };
