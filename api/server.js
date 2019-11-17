@@ -9,5 +9,10 @@ server.use(cors())
 server.use(helmet())
 server.use(express.json())
 
+
+server.get('/', (req, res) => {
+    res.status(200).json({message: "Server is up."})
+})
+
 module.exports = server
 
