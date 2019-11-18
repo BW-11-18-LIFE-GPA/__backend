@@ -1,4 +1,4 @@
-const db = require('../data/dbConfig.js');
+const db = require('../data/dbconfig.js');
 
 const fetchAll = () => {
     return db('habits')
