@@ -21,9 +21,9 @@ const fetchById = async id => {
 }
 
 const addHabit = async habit => {
-    const [id] = await db('habits').insert(habit);
+    await db('habits').insert(habit);
    
-    return fetchById(id);
+    return fetchBy(habit.name);
 }
 
 const removeHabit =  async id => {
