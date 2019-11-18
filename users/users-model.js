@@ -31,11 +31,11 @@ const getHabitById = async id => {
     return habit
 }
 
-const addUserHabit = async (user_id, habit) => {
-   await db('user_habits')
-    .insert(habit)
+const addUserHabit = async (habit) => {
+   const [id] = await db('user_habits')
+    .insert(habit, 'id')
 
-    return getHabitsByUser(user_id)
+    return getHabitById(id)
 }
 
 const removeUserHabit = async (id, user_id) => {

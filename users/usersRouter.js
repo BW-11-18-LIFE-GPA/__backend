@@ -55,7 +55,7 @@ router.get('/:user_id/habits/:id', requiresAuth, (req, res) =>{
 })
 
 router.post('/:user_id/habits', requiresAuth, (req, res) =>{
-    userHabits.addUserHabit(req.params.user_id, {...req.body, user_id: req.params.user_id})
+    userHabits.addUserHabit({...req.body, user_id: req.params.user_id})
     .then(habit => {
         res.status(201).json(habit)
     })
