@@ -3,13 +3,13 @@ const Users = require('./auth-model')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
   let user = req.body;
-  const hash = bcrypt.hashSync(user.password, 10);
+  const hash = await bcrypt.hashSync(user.password, 10);
   user.password = hash;
   Users.add(user)
-    .then(saved => {
-      res.status(201).json(saved.username);
+    .then(savedUser => {
+      res.status(201).json(savedUser);
     })
     .catch(error => {
       res.status(500).json(error);
