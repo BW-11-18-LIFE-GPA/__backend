@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     userHabits.getUserById(req.params.id)
     .then(user => {
-        if(user){
+        if(user.length){
         res.status(200).json(user)
         } else {
             res.status(404).json({Error: "There was no user found with that ID."})
