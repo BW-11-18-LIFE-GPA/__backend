@@ -23,6 +23,6 @@ async function add(user) {
 
 function findById(id) {
   return db('users')
-    .where({ id })
+    .where({'users.id': id})
     .first();
 }

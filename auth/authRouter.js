@@ -12,7 +12,8 @@ router.post('/register', async (req, res) => {
       res.status(201).json({username: savedUser.username});
     })
     .catch(error => {
-      res.status(500).json(error);
+      console.log(error)
+      res.status(500).json({Error: "There was a problem registering the account."});
     });
 });
 
@@ -33,7 +34,8 @@ router.post('/login', (req, res) => {
       }
     })
     .catch(error => {
-      res.status(500).json(error);
+      console.log(error)
+      res.status(500).json({Error: "There was a problem logging in."});
     });
 });
 
