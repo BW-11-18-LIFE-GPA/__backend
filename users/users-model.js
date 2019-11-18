@@ -1,13 +1,13 @@
 const db = require('../data/dbconfig')
 
 const getUserList = async() => {
-    const users = await db('users').select('username', 'id')
+    const users = await db('users').select('username', 'email', 'id')
 
     return users
 }
 
 const getUserById = async id => {
-    const user = await db('users').where({ id }).select('username')
+    const user = await db('users').where({ id }).select('username', 'email')
 
     return user
 }
