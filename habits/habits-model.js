@@ -1,17 +1,23 @@
 const db = require('../data/dbconfig.js');
 
-const fetchAll = () => {
-    return db('habits')
+const fetchAll = async() => {
+    const habits = await db('habits')
+
+    return habits
 }
 
-const fetchBy = filter => {
-    return db('habits').where(filter)
+const fetchBy = async filter => {
+    const habits = await db('habits').where(filter)
+
+    return habits
 }
 
-const fetchById = id => {
-    return db('habits')
+const fetchById = async id => {
+    const habit = await db('habits')
     .where({ id })
     .first()
+
+    return habit
 }
 
 const addHabit = async habit => {
@@ -20,8 +26,10 @@ const addHabit = async habit => {
     return fetchById(id);
 }
 
-const removeHabit =  id => {
-    return db('habits').delete().where({ id })
+const removeHabit =  async id => {
+   const habit = await db('habits').delete().where({ id })
+
+   return habit
 }
 
 const updateHabit = async (id, data) => {

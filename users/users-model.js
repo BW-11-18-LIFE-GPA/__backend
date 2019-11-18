@@ -1,26 +1,34 @@
 const db = require('../data/dbconfig')
 
-const getUserList = () => {
-    return db('users').select('username', 'id')
+const getUserList = async() => {
+    const users = await db('users').select('username', 'id')
+
+    return users
 }
 
-const getUserById = id => {
-    return db('users').where({ id }).select('username')
+const getUserById = async id => {
+    const user = await db('users').where({ id }).select('username')
+
+    return user
 }
 
-const getHabitsByUser = user_id =>{
-    return db.select('user_habits.id AS id', 'habits.name', 'habits.description','user_habits.score','habits.id AS habit_id')
+const getHabitsByUser = async user_id =>{
+    const habits = await db.select('user_habits.id AS id', 'habits.name', 'habits.description','user_habits.score','habits.id AS habit_id')
     .from('habits')
     .join('user_habits', 'habits.id', 'user_habits.habit_id')
     .join('users', 'user_habits.user_id', 'users.id')
     .where({'users.id': user_id})
+
+    return habits
 }
 
-const getHabitById = id => {
-    return db.select('user_habits.id AS id', 'habits.name', 'habits.description','user_habits.score','habits.id AS habit_id')
+const getHabitById = async id => {
+    const habit = await db.select('user_habits.id AS id', 'habits.name', 'habits.description','user_habits.score','habits.id AS habit_id')
     .from('habits')
     .join('user_habits', 'habits.id', 'user_habits.habit_id')
     .where({'user_habits.id': id})
+
+    return habit
 }
 
 const addUserHabit = async (habit) => {
