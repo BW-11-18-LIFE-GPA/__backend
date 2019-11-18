@@ -9,7 +9,7 @@ router.post('/register', async (req, res) => {
   user.password = hash;
   Users.add(user)
     .then(savedUser => {
-      res.status(201).json({username: savedUser.username});
+      res.status(201).json({username: savedUser.username, email: savedUser.email});
     })
     .catch(error => {
       console.log(error)
@@ -18,8 +18,9 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-  let { username, password } = req.body;
+  let { username, password, email } = req.body;
 
+  if (username){
   Users.findBy({ username })
     .first()
     .then(user => {
@@ -37,6 +38,25 @@ router.post('/login', (req, res) => {
       console.log(error)
       res.status(500).json({Error: "There was a problem logging in."});
     });
+  } else {
+    Users.findBy({ email })
+    .first()
+    .then(user => {
+      if (user && bcrypt.compareSync(password, user.password)) {
+        const token = getJwtToken(user.username)
+        res.status(200).json({
+          token,
+          message: `Welcome ${user.username}!`,
+        });
+      } else {
+        res.status(401).json({ message: 'Invalid Credentials' });
+      }
+    })
+    .catch(error => {
+      console.log(error)
+      res.status(500).json({Error: "There was a problem logging in."});
+    });
+  }
 });
 
 function getJwtToken (username) {
