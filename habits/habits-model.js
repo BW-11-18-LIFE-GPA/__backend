@@ -23,7 +23,7 @@ const fetchById = async id => {
 const addHabit = async habit => {
     const [id] = await db('habits').insert(habit, 'id');
    
-    return fetchBy(id);
+    return fetchById(id);
 }
 
 const removeHabit =  async id => {
