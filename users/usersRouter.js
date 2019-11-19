@@ -32,7 +32,8 @@ router.get('/:user_id/habits', requiresAuth, (req, res) => {
     userHabits.getHabitsByUser(req.params.user_id)
     .then(habits => {
         if(habits.length){
-            res.status(200).json(habits)
+            const reduced = habits.reduce((a, b) => a + b.score, 0)
+            res.status(200).json({habits, gpa:reduced/habits.length})
         } else {
             res.status(404).json({message: "There doesn't seem to be any habits by this user id."})
         }
